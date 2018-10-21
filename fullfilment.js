@@ -5,14 +5,13 @@ const {WebhookClient} = require('dialogflow-fulfillment');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
  
-function WebhookProcesing(req ,res){
-  const agent = new WebhookClient({req,res});
+exports.WebhookProcesing  = function (req, res) {
+  const agent = new WebhookClient({ request: req, response: res });
   console.info('agent set');
-  intentMap.set('Default Welcome Intent',welcome);
+  let intentMap = new Map();
+  intentMap.set('Default Welcome Intent', welcome);
   agent.handleRequest(intentMap);
 }
-
-function welcome(agent){
+function welcome(agent) {
   agent.add("Success Congrate!");
 }
-
